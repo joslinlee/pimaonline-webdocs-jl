@@ -72,23 +72,8 @@ export default function PluginsSidebar() {
         </li>
         <li className={activeId === "toc-view-options-main" ? "is-current" : ""}><Link href="/plugins/#view-options-main" className="toc-view-options-main">View Options</Link>
           <ul>
-            <li className={activeId === "toc-dark-mode" ? "is-current" : ""}>
-              <Link href="/plugins/#dark-mode" className="toc-dark-mode">Dark Mode</Link>
-            </li>
-            <li className={activeId === "toc-focus-text" ? "is-current" : ""}>
-              <Link href="/plugins/#focus-text" className="toc-focus-text">Focus Text</Link>
-            </li>
-            <li className={activeId === "toc-large-text" ? "is-current" : ""}>
-              <Link href="/plugins/#large-text" className="toc-large-text">Large Text</Link>
-            </li>
-            <li className={activeId === "toc-narrow-width" ? "is-current" : ""}>
-              <Link href="/plugins/#narrow-width" className="toc-narrow-width">Narrow Width</Link>
-            </li>
-            <li className={activeId === "toc-custom-combos" ? "is-current" : ""}>
-              <Link href="/plugins/#custom-combos" className="toc-custom-combos">Custom Combinations</Link>
-            </li>
             <li className={activeId === "toc-view-options" ? "is-current" : ""}>
-              <Link href="/plugins/#view-options" className="toc-view-options">All View Options</Link>
+              <Link href="/plugins/#view-options" className="toc-view-options">Dark Mode</Link>
             </li>
           </ul>
         </li>

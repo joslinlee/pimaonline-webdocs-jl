@@ -36,8 +36,8 @@ export default function ViewOptions() {
   return (
     <>
       <section className="wd-content" id="toc-view-options">
-        <h3 id="view-options" className="section-top anchor">All View Options</h3>
-        <p>Use <span className="wd-monospace">view-options</span> to automatically add all of the above view options to your course shell. This gives students the option to toggle any combination of dark mode, focus reader, large text, or narrow width versions of the webpage.</p>
+        <h3 id="view-options" className="section-top anchor">Dark Mode</h3>
+        <p>Use <span className="wd-monospace">view-options</span> or <span className="wd-monospace">dark-mode</span> to add the dark mode view option to your course shell. This gives students the option to toggle on a dark mode version of the webpage.</p>
 				<div className="wd-window">
 					<div className="wd-btn-container">
 						<button className="wd-toggle-btn"	onClick={() => setShowCode(!showCode)}>{showCode ? "Hide code" : "Show code"}</button>
@@ -49,7 +49,7 @@ export default function ViewOptions() {
           <div className="wd-html-code">
             <pre>
               <code className="language-html" ref={codeRef}>
-                {String.raw`<body view-options>`}
+                {String.raw`<body view-options>`}{"\n"}{String.raw`<!-- OR -->`}{"\n"}{String.raw`<body dark-mode>`}
               </code>
             </pre>
           </div>
@@ -59,10 +59,10 @@ export default function ViewOptions() {
 				<div className="wd-visual-ex">
         <section className="wd-side-by-side">
         <div className="wd-side-by-side-item">
-         <Image src="/images/plugins/VO-all-open.jpg" alt="" width={292} height={280} priority="true"  />
+         <Image src="/images/plugins/VO-dark.jpg" alt="" width={292} height={280} priority="true"  />
           </div>
           <div className="wd-side-by-side-item">
-          <Image src="/images/plugins/VO-all-on.jpg" alt="" width={292} height={280} />
+          <Image src="/images/plugins/VO-dark-on.jpg" alt="" width={292} height={280} />
           </div>
           </section>
           </div>

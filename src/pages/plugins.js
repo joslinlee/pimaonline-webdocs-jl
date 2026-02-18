@@ -5,12 +5,7 @@ import hljs from "highlight.js/lib/core";
 import "highlight.js/styles/night-owl.css";
 import html from "highlight.js/lib/languages/xml";
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
-import DarkMode from "@/components/plugins/DarkMode";
-import FocusText from "@/components/plugins/FocusText";
-import LargeText from "@/components/plugins/LargeText";
-import NarrowWidth from "@/components/plugins/NarrowWidth";
 import ViewOptions from "@/components/plugins/ViewOptions";
-import CustomCombos from "@/components/plugins/CustomCombos";
 import FadeInAnimation from "@/components/plugins/FadeInAnimation";
 import SlideInAnimations from "@/components/plugins/SlideInAnimations";
 import ButtonsAnimations from "@/components/plugins/ButtonAnimations";
@@ -85,21 +80,6 @@ export default function Plugins() {
           </div>
           <h2 id="view-options-main" className="section-top anchor">View Options</h2>
         <p className="wd-break">Quickly offer view option features by adding just a single attribute to your <span className="wd-monospace">&lt;body&gt;</span> element</p>
-          <div className="wd-subitems">
-          <DarkMode />
-          </div>
-          <div className="wd-subitems">
-          <FocusText />
-          </div>
-          <div className="wd-subitems">
-          <LargeText />
-          </div>
-          <div className="wd-subitems">
-          <NarrowWidth />
-          </div>
-          <div className="wd-subitems">
-          <CustomCombos />
-          </div>
           <div className="wd-subitems">
           <ViewOptions />
           </div>
