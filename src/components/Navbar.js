@@ -64,7 +64,6 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
-      {router.pathname === "/" && <Announcement />}
     </>
   )
 }
