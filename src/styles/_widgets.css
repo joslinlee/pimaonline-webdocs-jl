@@ -9,6 +9,7 @@
 	--color-pcc-secondary-hover: rgba(236, 119, 9, 1);
 	--color-pcc-tertiary-hover: rgba(0, 146, 199, 1);
 	--color-pcc-white: rgba(255, 255, 255, 1);
+	--color-error: rgba(189, 66, 84, 1);
 }
 .btn {
 	background-color: #2e5e8e;
@@ -1476,7 +1477,8 @@ table.display-lg thead {
 	width: 100%;
 }
 
-.instructions.complete {
+/* Hides the quiz or instructions area for content lock */
+.instructions.complete, .quiz.complete {
 	display: none;
 }
 
@@ -1510,6 +1512,48 @@ table.display-lg thead {
 	margin: auto;
 	margin-bottom: 15px;
 }
+
+/* Content Lock Quiz Widget */
+
+.quiz form {
+  background-color: var(--color-pcc-white);
+  background-color: var(--color-pcc-ltgrey);
+  z-index: 10;
+  display: flex;
+  justify-content: unset;
+  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 40px;
+  margin: 40px;
+  padding: 15px;
+  border-radius: 5px;
+  gap: 10px;
+
+label.quiz-option {
+  display: flex;
+  align-items: flex-start; /* keeps input aligned to first line */
+  gap: 8px; /* space between input and text */
+  width: fit-content;
+  height: auto;
+  cursor: auto;
+}
+
+.quiz-option input {
+  margin-right: 10px;
+  margin-top: 3px; /* optional: fine-tune vertical alignment */
+}
+
+h3, span {
+	color: var(--color-pcc-black);
+}
+
+.error-container span {
+  color: var(--color-error);
+}
+
+}
+
 
 /* Flip Card CSS  */
 
