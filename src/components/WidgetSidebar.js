@@ -16,11 +16,12 @@ export default function WidgetSidebar() {
 		"toc-call-out",
 		"toc-card-horizontal",
 		"toc-columns",
+		"toc-content-lock",
+		"toc-content-lock-quiz",
 		"toc-expandable-banner",
 		"toc-flip-card",
 		"toc-horizontal-display",
 		"toc-img-gallery",
-		"toc-locked-content",
 		"toc-media-container",
 		"toc-numbered-dl",
 		"toc-persistent-checklist",
@@ -137,6 +138,16 @@ export default function WidgetSidebar() {
 								className="toc-content-lock"
 							>
 								Content Lock
+							</Link>
+						</li>
+						<li
+							className={activeId === "toc-content-lock-quiz" ? "is-current" : ""}
+						>
+							<Link
+								href="/widgets/#content-lock-quiz"
+								className="toc-content-lock-quiz"
+							>
+								Content Lock Quiz
 							</Link>
 						</li>
 						<li className={activeId === "toc-expandable-banner" ? "is-current" : ""}>
