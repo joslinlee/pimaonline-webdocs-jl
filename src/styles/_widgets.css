@@ -2029,7 +2029,7 @@ dl.numbered-list dd {
 
 .calendar-grid .calendar-card {
 	align-items: flex-start;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)), var(--card-bg-image, url('https://placehold.co/300x300/045594/FFF?text=BG+Image'));
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)), var(--card-bg-image, url('/images/widgets/calendar-cards/calendar-card_discussion-post.jpg'));
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -2064,9 +2064,9 @@ dl.numbered-list dd {
 	margin: 0.3rem 0;
 }
 
-.calendar-grid .calendar-card a.btn {
+.calendar-card a.btn {
 	background-color: var(--color-pcc-white);
-	color: var(--color-pcc-black) !important;
+	color: var(--color-pcc-black);
 	border: none;
 	border-radius: 0;
 	display: inline-block;
