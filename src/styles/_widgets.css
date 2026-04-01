@@ -2076,3 +2076,99 @@ dl.numbered-list dd {
   margin-bottom: 1em;
   margin-top: 0.5rem;
 }
+
+/* Calendar Card Widget */
+
+.calendar-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(16.7rem, 1fr));
+	justify-items: center;
+	gap: 1.6rem;
+	margin: 1.5rem 0;
+}
+
+.calendar-grid .calendar-card {
+	align-items: flex-start;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)), var(--card-bg-image, url('/images/widgets/calendar-cards/calendar-card_discussion-post.jpg'));
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 10px;
+	box-shadow: 1px 1px 10px 2px rgba(13, 13, 13, 0.15);
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	height: 300px;
+	justify-content: flex-start;
+	padding: 1rem;
+	position: relative;
+	text-align: left;
+	transition: all 0.2s ease-in-out;
+	width: 100%;
+	max-width: 300px;
+}
+
+.calendar-grid .calendar-card h3 {
+	color: var(--color-pcc-white);
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border: none;
+	margin: 0;
+}
+
+.calendar-grid .calendar-card h4 {
+	color: var(--color-pcc-white);
+	font-size: 1.1rem;
+	font-weight: 700;
+	margin: 0.3rem 0;
+}
+
+.calendar-card a.btn {
+	background-color: var(--color-pcc-white);
+	color: var(--color-pcc-black);
+	border: none;
+	border-radius: 0;
+	display: inline-block;
+	margin-top: auto;
+	margin-bottom: 0;
+}
+
+.calendar-grid .calendar-card .card-image {
+	display: none;
+}
+
+.calendar-grid .calendar-card.discussion-post {
+	--card-bg-image: url('/images/widgets/calendar-cards/calendar-card_discussion-post.jpg');
+}
+
+.calendar-grid .calendar-card.discussion-response {
+	--card-bg-image: url('/images/widgets/calendar-cards/calendar-card_discussion-response.jpg');
+}
+
+.calendar-grid .calendar-card.activity {
+	--card-bg-image: url('/images/widgets/calendar-cards/calendar-card_practice.jpg');
+}
+
+.calendar-grid .calendar-card.reading {
+	--card-bg-image: url('/images/widgets/calendar-cards/calendar-card_reading.jpg');
+}
+
+.calendar-grid .calendar-card.quiz {
+	--card-bg-image: url('/images/widgets/calendar-cards/calendar-card_quiz.jpg');
+}
+
+@media screen and (min-width: 1024px) {
+	.calendar-grid:hover .calendar-card,
+	.calendar-grid:focus-within .calendar-card {
+		opacity: 0.6;
+		transform: scale(0.98);
+	}
+
+	.calendar-grid .calendar-card:hover,
+	.calendar-grid .calendar-card:focus-within {
+		opacity: 1;
+		transform: scale(1.02);
+		z-index: 1;
+	}
+}

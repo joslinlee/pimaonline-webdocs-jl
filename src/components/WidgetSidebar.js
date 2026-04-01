@@ -13,6 +13,7 @@ export default function WidgetSidebar() {
 		"toc-assignments",
 		"toc-blockquote",
 		"toc-border",
+		"toc-calendar-cards",
 		"toc-call-out",
 		"toc-card-horizontal",
 		"toc-columns",
@@ -108,6 +109,11 @@ export default function WidgetSidebar() {
 						<li className={activeId === "toc-border" ? "is-current" : ""}>
 							<Link href="/widgets/#border" className="toc-border">
 								Border
+							</Link>
+						</li>
+						<li className={activeId === "toc-calendar-cards" ? "is-current" : ""}>
+							<Link href="/widgets/#calendar-cards" className="toc-calendar-cards">
+								Calendar Cards
 							</Link>
 						</li>
 						<li className={activeId === "toc-call-out" ? "is-current" : ""}>
