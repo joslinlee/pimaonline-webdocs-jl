@@ -10,6 +10,7 @@
 	--color-pcc-tertiary-hover: rgba(0, 146, 199, 1);
 	--color-pcc-white: rgba(255, 255, 255, 1);
 	--color-error: rgba(189, 66, 84, 1);
+	--color-success-text: rgba(0, 128, 0, 1); 
 }
 .btn {
 	background-color: #2e5e8e;
@@ -1548,12 +1549,27 @@ h3, span {
 	color: var(--color-pcc-black);
 }
 
-.error-container span {
+.quiz-error-message {
   color: var(--color-error);
 }
 
+.quiz-success-message {
+	color: var(--color-success-text);
 }
 
+}
+
+.reset-locked-area-btn {
+    font-size: var(--font-size-small);
+    color: var(--color-pcc-dkgrey);
+    background: rgba(0,0,0,0);
+    border: 2px solid var(--color-pcc-ltgrey);
+    padding: 2px 5px;
+    transition: .2s;
+	border-radius: 3px;
+	cursor: pointer;
+	margin-top: 10px;
+}
 
 /* Flip Card CSS  */
 
