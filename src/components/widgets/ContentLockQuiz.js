@@ -4,6 +4,8 @@ import html from "highlight.js/lib/languages/xml";
 
 const lockedContentQuizIncorrectAnswer = "Incorrect response. Please try again."; // Error response for quizzes
 const lockedContentQuizEmptyResponse = "Please select an option before submitting."; // Error response for quizzes
+const lockedContentQuizCorrectAnswer = "Correct response. Content is now unlocked.";
+const messageTimeDuration = 750; // Duration for which feedback messages are displayed (in milliseconds)
 
 
 hljs.registerLanguage("html", html);
@@ -13,6 +15,21 @@ export default function ContentLockWidget() {
     const codeRef = useRef(null);
     const [buttonText, setButtonText] = useState("Copy code");
     const [keyStatus, setKeyStatus] = useState(false);
+
+    const handleResetLockedArea = () => {
+        const contentLockQuizForm = document.getElementById("quiz1");
+
+        if (contentLockQuizForm) {
+            contentLockQuizForm.reset();
+
+            const contentLockErrorContainer = contentLockQuizForm.querySelector(".error-container");
+            if (contentLockErrorContainer) {
+                contentLockErrorContainer.innerHTML = "";
+            }
+        }
+
+        setKeyStatus(false);
+    };
 
     // useEffect runs in the client side to listen for state changes and have access to the document object
     useEffect(() => {
@@ -39,19 +56,30 @@ export default function ContentLockWidget() {
                     const isCorrect = selectedLabel?.getAttribute("data-correct") === "true";
 
                     if (isCorrect) {
-                        // Tells the user they selected the correct response
-                        alert("Correct response");
-                        setKeyStatus(true);
+                        // Use set time out for a delay to show the message
+                        displayMessage(contentLockQuizForm, lockedContentQuizCorrectAnswer, "success");
+                        setTimeout(() => {
+                            resetDisplay(contentLockQuizForm);
+                            setKeyStatus(true);
+                        }, messageTimeDuration);
                         return true;
                     } else {
                         // Sets the error message for the user
                         contentLockErrorMessage = lockedContentQuizIncorrectAnswer;
-                        displayError(contentLockQuizForm, contentLockErrorMessage);
+                        displayMessage(contentLockQuizForm, contentLockErrorMessage, "error");
+                        setTimeout(() => {
+                            resetDisplay(contentLockQuizForm);
+                        }, messageTimeDuration);
+                        setKeyStatus(false);
                         return false;
                     }
                 } else {
                     contentLockErrorMessage = lockedContentQuizEmptyResponse;
-                    displayError(contentLockQuizForm, contentLockErrorMessage);
+                    displayMessage(contentLockQuizForm, contentLockErrorMessage, "error");
+                    setTimeout(() => {
+                        resetDisplay(contentLockQuizForm);
+                    }, messageTimeDuration);
+                    setKeyStatus(false);
                     return false;
                 }
             } else {
@@ -61,45 +89,43 @@ export default function ContentLockWidget() {
             }
         }
 
-        // Function to display the error message from the form
-        const displayError = (quizForm, contentLockErrorMessage) => {
-
-            // Ensure there is a container in the correct location for displaying error messages
+        // Function to display feedback from the form above the submit button
+        const displayMessage = (quizForm, messageText, messageType) => {
             let contentLockErrorContainer = ensureErrorContainerPlacement(quizForm);
+            let messageElement = document.createElement("span");
 
-            // Create a fresh error message element and clear any previous errors
-            let errorMessage = document.createElement("span");
             contentLockErrorContainer.innerHTML = "";
-            errorMessage.textContent = "";
+            messageElement.textContent = messageText;
+            messageElement.className = messageType === "success" ? "quiz-success-message" : "quiz-error-message";
 
-            // Add a timer to apply the new error message to ensure the user understands it is a new error message
-            setTimeout(function () {
+            contentLockErrorContainer.appendChild(messageElement);
+        };
 
-                // Clear error message
-                errorMessage.textContent = contentLockErrorMessage;
+        // Function to reset display message
+        const resetDisplay = (quizForm) => {
+            let contentLockErrorContainer = ensureErrorContainerPlacement(quizForm);
+            let messageElement = contentLockErrorContainer.querySelector(".quiz-success-message, .quiz-error-message");
+            if (messageElement) {
+                messageElement.textContent = "";
+            }
+        };
 
-                // Append the new error message to the container
-                contentLockErrorContainer.appendChild(errorMessage);
+        const ensureErrorContainerPlacement = (quizForm) => {
+            let contentLockErrorContainer = quizForm.querySelector(".error-container");
 
-            }, 200); // 200 milliseconds = .2 seconds
+            if (!contentLockErrorContainer) {
+                contentLockErrorContainer = document.createElement("div");
+                contentLockErrorContainer.classList.add("error-container");
+                const formUnlockBtn = quizForm.querySelector(".unlock-btn");
+                if (formUnlockBtn) {
+                    formUnlockBtn.insertAdjacentElement("beforebegin", contentLockErrorContainer);
+                } else {
+                    quizForm.appendChild(contentLockErrorContainer);
+                }
+            }
+
+            return contentLockErrorContainer;
         }
-
-          const ensureErrorContainerPlacement = (quizForm) => {
-    let contentLockErrorContainer = quizForm.querySelector(".error-container");
-
-    if (!contentLockErrorContainer) {
-      contentLockErrorContainer = document.createElement("div");
-      contentLockErrorContainer.classList.add("error-container");
-      const formUnlockBtn = quizForm.querySelector(".unlock-btn");
-      if (formUnlockBtn) {
-        formUnlockBtn.insertAdjacentElement("beforebegin", contentLockErrorContainer);
-      } else {
-        quizForm.appendChild(contentLockErrorContainer);
-      }
-    }
-
-    return contentLockErrorContainer;
-  }
 
         // End of Dumbed Down Code to work with webdocs ----------
 
@@ -177,31 +203,33 @@ export default function ContentLockWidget() {
                 Content Lock Quiz
             </h2>
             <p>
-                Use the <strong>Content Lock Widget Quiz</strong> to lock and unlock content through a simple quiz.
+                Use the <strong>Content Lock Widget Quiz</strong> to lock and unlock content through a simple quiz with one correct answer.
             </p>
             <p>
                 Use <span className="wd-monospace">.content-lock-widget</span> to wrap the entire widget.
                 Use <span className="wd-monospace">.locked-content</span> to wrap the content you want hidden.
                 Use <span className="wd-monospace">.instructions</span> to inform students about why content is hidden.
-                Use <span className="wd-monospace">.unlocked-btn</span> to label the condition for unlocking the content.
                 Use <span className="wd-monospace">.quiz</span> to wrap the quiz elements.
+                Use <span className="wd-monospace">.correct-answer</span> to mark the correct quiz option.
             </p>
             <h3>Data Keys</h3>
             <p>
-                Each instance of the Content Lock Widget requries a <span className="wd-monospace">data-key</span> atribute assigned to a number to be attached to the <span className="wd-monospace">.locked-content</span> div. These data keys give you control as to which areas are unlocked.
-                For quizzes, please only use one quiz per data-key. This ensures that after one quiz is completed, it allows for the other quizzes to be completed.
-            </p>
-            <h4>For Example:</h4>
-            <p>
-                If two Content Lock Widget Quizzes on a single page have the same data key. Once one is unlocked, both will unlock. If they have different data keys, they can be unlocked independently.
+                Each Content Lock Widget needs a numeric <span className="wd-monospace">data-key</span> on the <span className="wd-monospace">.locked-content</span> div. Matching keys control what unlocks together.
+                Use one quiz per data-key so each quiz unlocks only one locked area. If multiple locked areas share a key, they will all unlock when that quiz is answered correctly.
+                Quiz and non-quiz Content Lock Widgets use the same key system, so sharing a key between them will unlock both.
             </p>
             <div className="wd-window">
                 <div className="wd-visual-ex">
                     <div className="white-background">
-                        <div className="content-lock-widget">
+                        <div className={`content-lock-widget${keyStatus ? " unlocked" : ""}`}>
                             <div className="locked-content" data-key="1">
                                 <h2>Visible Content Section</h2>
                                 <p>This section displays the initial part of the content that is only partially revealed. As you scroll or interact with the widget, more of the content gradually becomes visible. This mechanism encourages engagement by requiring the user to reveal additional information, enhancing their learning experience.</p>
+                                {keyStatus && (
+                                    <button type="button" className="reset-locked-area-btn" onClick={handleResetLockedArea}>
+                                        Reset Locked Area
+                                    </button>
+                                )}
                             </div>
                             <div className="instructions">
                                 <p>Please complete the quiz below.</p>
@@ -209,13 +237,13 @@ export default function ContentLockWidget() {
                             <div className="quiz">
                                 <form id="quiz1">
                                     <h3>What Option is Correct?</h3>
-                                    <label className="correct-answer quiz-option" data-correct="true">
-                                        <input type="radio" name="quiz-options" value="a" className="correct-answer" />
-                                        <span>Also Correct</span>
+                                    <label className="quiz-option">
+                                        <input type="radio" name="quiz-options" value="a"/>
+                                        <span>Option A</span>
                                     </label>
                                     <label className="quiz-option">
                                         <input type="radio" name="quiz-options" value="b" />
-                                        <span>This is the long answer text line to see how the different lengths affect the layout</span>
+                                        <span>Option B</span>
                                     </label>
                                     <label className="correct-answer quiz-option" data-correct="true">
                                         <input type="radio" name="quiz-options" value="c" className="correct-answer" />
@@ -226,7 +254,7 @@ export default function ContentLockWidget() {
                                         <span>Option D</span>
                                     </label>
                                     <div className="error-container"></div>
-                                    <input type="button" value="Submit" className="unlock-btn" tabindex="0" />
+                                    <input type="button" value="Submit" className="unlock-btn" />
                                 </form>
                             </div>
                         </div>
@@ -259,9 +287,9 @@ export default function ContentLockWidget() {
     <div class="quiz">
         <form>
             <h3>What Option is Correct?</h3>
-            <label class="correct-answer">Option A (correct)</label>
+            <label class="correct-answer">Option A</label>
             <label>Option B</label>
-            <label class="correct-answer">Option C (correct)</label>
+            <label class="correct-answer">Correct Answer</label>
             <label>Option D</label>
         </form>
     </div>
