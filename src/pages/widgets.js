@@ -5,6 +5,7 @@ import Accordion from "@/components/widgets/Accordion";
 import Assignments from "@/components/widgets/Assignments";
 import Blockquote from "@/components/widgets/Blockquote";
 import Border from "@/components/widgets/Border";
+import CalendarCards from "@/components/widgets/CalendarCards";
 import CallOut from "@/components/widgets/CallOut";
 import CardHorizontal from "@/components/widgets/CardHorizontal";
 import ExpandableBanner from "@/components/widgets/ExpandableBanner";
@@ -75,6 +76,7 @@ export default function Widgets() {
 					<Assignments />
 					<Blockquote />
 					<Border />
+					<CalendarCards />
 					<CallOut />
 					<CardHorizontal />
 					<Columns />
