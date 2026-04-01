@@ -10,7 +10,7 @@ const messageTimeDuration = 750; // Duration for which feedback messages are dis
 
 hljs.registerLanguage("html", html);
 
-export default function ContentLockWidget() {
+export default function ContentLockWidgetQuiz() {
     // State variables
     const codeRef = useRef(null);
     const [buttonText, setButtonText] = useState("Copy code");
