@@ -13,6 +13,7 @@ import FlipCard from "@/components/widgets/FlipCard";
 import HorizontalDisplay from "@/components/widgets/HorizontalDisplay";
 import ImageGallery from "@/components/widgets/ImageGallery";
 import ContentLock from "@/components/widgets/ContentLock";
+import ContentLockQuiz from "@/components/widgets/ContentLockQuiz";
 import MediaContainer from "@/components/widgets/MediaContainer";
 import SideBySide from "@/components/widgets/SideBySide";
 import SocialPost from "@/components/widgets/SocialPost";
@@ -80,6 +81,7 @@ export default function Widgets() {
 					<CardHorizontal />
 					<Columns />
 					<ContentLock />
+					<ContentLockQuiz />
 					<ExpandableBanner />
 					<FlipCard />
 					<HorizontalDisplay />

@@ -10,21 +10,17 @@ export default function ContentLockWidget() {
   const [buttonText, setButtonText] = useState("Copy code");
   const [keyStatus, setKeyStatus] = useState(false);
 
+  const handleUnlockButtonClick = () => {
+    setKeyStatus(true);
+  };
+
+  const handleResetLockedArea = () => {
+    setKeyStatus(false);
+  };
+
   // useEffect runs in the client side to listen for state changes and have access to the document object
   useEffect(() => {
     const contentUnlockBtn = document.querySelector(".unlock-btn");
-
-    // Triggers the confirmation window for studnet to agree to terms
-    const handleUnlockButtonClick = () => {
-
-      // Saves the confirmation response from student
-      const confirmed = window.confirm(`Please confirm: ${contentUnlockBtn.textContent}`);
-
-      if (confirmed) {
-        // If use clicks ok, then change state variable keyStatus to true
-        setKeyStatus(true);
-      }
-    };
 
     // Add click event listener to the unlock content button
     contentUnlockBtn.addEventListener("click", handleUnlockButtonClick);
@@ -94,12 +90,12 @@ export default function ContentLockWidget() {
       <p>
 				Use <span className="wd-monospace">.content-lock-widget</span> to wrap the entire widget.
         Use <span className="wd-monospace">.locked-content</span> to wrap the content you want hidden.
-        Use <span className="wd-monospace">.instructions</span> to inform students about why content is hidden.
-        Use <span className="wd-monospace">.unlocked-btn</span> to label the condition for unlocking the content.
+        Use <span className="wd-monospace">.instructions</span> to inform students what they need to do to unlock the content.
+        Use <span className="wd-monospace">.unlocked-btn</span> to label the action for unlocking the content.
       </p>
 			<h3>Data Keys</h3>
 			<p>
-				Each instance of the Content Lock Widget requries a <span className="wd-monospace">data-key</span> atribute assigned to a number to be attached to the <span className="wd-monospace">.locked-content</span> div. These data keys give you control as to which areas are unlocked.
+				Each Content Lock Widget needs a numeric <span className="wd-monospace">data-key</span> on the <span className="wd-monospace">.locked-content</span> div. Matching keys control what unlocks together.
 			</p>
 			<h4>For Example:</h4>
 			<p>
@@ -108,14 +104,19 @@ export default function ContentLockWidget() {
       <div className="wd-window">
         <div className="wd-visual-ex">
           <div className="white-background">
-						<div className="content-lock-widget">
+            <div className={`content-lock-widget${keyStatus ? " unlocked" : ""}`}>
 							<div className="locked-content" data-key="1">
 								<h2>Visible Content Section</h2>
 								<p>This section displays the initial part of the content that is only partially revealed. As you scroll or interact with the widget, more of the content gradually becomes visible. This mechanism encourages engagement by requiring the user to reveal additional information, enhancing their learning experience.</p>
+                {keyStatus && (
+                  <button type="button" className="reset-locked-area-btn" onClick={handleResetLockedArea}>
+                    Reset Locked Area
+                  </button>
+                )}
 								</div>
 								<div className="instructions">
-									<p>Please follow the steps below.</p>
-									<a className="btn unlock-btn">Confirm Completion of Steps A, B, and C</a>
+									<p>I have read and understand all the saftey protocols for this lab.</p>
+									<a className="btn unlock-btn">Confirm</a>
 								</div>
 						</div>
           </div>
@@ -135,18 +136,18 @@ export default function ContentLockWidget() {
         <div className="wd-html-code">
           <pre>
             <code className="language-html" ref={codeRef}>
-              {String.raw`<div class="content-body">
+              {String.raw`
   <div class="content-lock-widget">
     <div class="locked-content" data-key="1">
       <h2>Visible Content Section</h2>
       <p>This section displays the initial part of the content that is only...</p>
     </div>
     <div class="instructions">
-      <p>Please follow the steps below.</p>
-      <a class="unlock-btn">Confirm Completion of Steps A, B, and C</a>
+      <p>I have read and understand all the safety protocols for this lab.</p>
+      <a class="unlock-btn">Confirm</a>
     </div>
   </div>
-</div>`}
+`}
             </code>
           </pre>
         </div>
