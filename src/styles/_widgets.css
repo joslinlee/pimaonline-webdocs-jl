@@ -2171,3 +2171,14 @@ dl.numbered-list dd {
 		z-index: 1;
 	}
 }
+
+dl.info-table {
+	display: grid;
+	grid-template-columns: minmax(100px, max-content) minmax(150px, max-content);
+	column-gap: 1rem;
+	line-height: 1.6;
+
+	dt {
+		font-weight: bold;
+	}
+}
