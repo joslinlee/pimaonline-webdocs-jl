@@ -16,7 +16,7 @@ export default function InfoTable() {
   }, [showCode]);
 
   const handleCopyCode = async () => {
-    if (!codeRef.current) return;
+    if (!codeRef.current || !navigator.clipboard) return;
     try {
       await navigator.clipboard.writeText(codeRef.current.textContent);
       setButtonText("Copied!");
